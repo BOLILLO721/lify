@@ -2,8 +2,16 @@
 
 # dependencies
 /node_modules
+/backend/node_modules
 /.pnp
 .pnp.js
+
+# variables de entorno (credenciales de Spotify y Atlas)
+.env
+.env.*
+*.env
+backend/.env
+backend/*.env
 
 # testing
 /coverage

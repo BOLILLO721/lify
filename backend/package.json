@@ -1,0 +1,31 @@
+{
+  "name": "lify-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "API intermediaria de Lify: proxy de la Web API de Spotify.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "axios": "^1.20.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.22.3",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.8.0",
+    "mongoose": "^9.12.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.3"
+  }
+}

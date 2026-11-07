@@ -2,37 +2,762 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App--with-player .App-header {
+  padding-bottom: 110px;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #191414;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 40px 20px 60px;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header h1 {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-subtitle {
+  margin: 0;
+  color: #b3b3b3;
+}
+
+.App-error {
+  max-width: 520px;
+  color: #ff6b6b;
+}
+
+.App-player-error {
+  max-width: 540px;
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid #ff6b6b;
+  border-radius: 999px;
+  padding: 6px 16px;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.App-status,
+.App-empty {
+  color: #b3b3b3;
+  margin: 0 0 12px;
+}
+
+/* Estado de sesión (OAuth) */
+
+.App-auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.App-connect {
+  background: #1db954;
+  color: #0c1015;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.App-connect:hover {
+  background: #1aa74a;
+}
+
+.App-auth-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b3b3b3;
+  font-size: 0.85rem;
+}
+
+.App-auth-user img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.App-auth-button {
+  background: transparent;
+  border: 1px solid #4a4f5a;
+  color: #b3b3b3;
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.App-auth-button:hover {
+  color: #fff;
+  border-color: #7d7d7d;
+}
+
+/* Buscador */
+
+.App-search {
+  width: 100%;
+  max-width: 640px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.App-modes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.App-mode {
+  background: transparent;
+  border: 1px solid #4a4f5a;
+  color: #b3b3b3;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.App-mode:hover {
+  color: #fff;
+}
+
+.App-mode--active {
+  background: #1db954;
+  border-color: #1db954;
+  color: #0c1015;
+  font-weight: 600;
+}
+
+.App-search-row {
+  display: flex;
+  gap: 8px;
+}
+
+.App-search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid #4a4f5a;
+  background: #282c34;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.App-search-input:focus {
+  outline: 2px solid #1db954;
+  outline-offset: 1px;
+}
+
+.App-search-button {
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  background: #1db954;
+  color: #0c1015;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.App-search-button:hover {
+  background: #1aa74a;
+}
+
+/* Lista de canciones */
+
+.App-songs {
+  width: 100%;
+  max-width: 860px;
+  margin-top: 32px;
+}
+
+.App-songs h2 {
+  font-size: 1.3rem;
+  margin: 0 0 16px;
+}
+
+.App-songlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.App-song {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #282c34;
+  border-radius: 12px;
+  padding: 10px 16px;
+  text-align: left;
+  border: 1px solid transparent;
+}
+
+.App-song--playing {
+  border-color: #1db954;
+}
+
+.App-song-cover {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.App-song-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+  color: #b3b3b3;
+  font-size: 0.85rem;
+}
+
+.App-song-info strong {
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.App-song-album {
+  color: #7d7d7d;
+}
+
+.App-song-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.App-play {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: #1db954;
+  color: #0c1015;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+}
+
+.App-play:hover:not(:disabled) {
+  background: #1aa74a;
+}
+
+.App-play:disabled {
+  background: #3a3f47;
+  color: #7d7d7d;
+  cursor: not-allowed;
+}
+
+.App-play--active {
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Artistas */
+
+.App-artists {
+  width: 100%;
+  max-width: 860px;
+  margin-top: 32px;
+}
+
+.App-artists h2 {
+  font-size: 1.3rem;
+  margin: 0 0 16px;
+}
+
+.App-artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.App-artist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.App-artist img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.App-artist--selected {
+  border-color: #1db954;
+  background: #282c34;
+}
+
+/* Álbumes */
+
+.App-albums {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 860px;
+}
+
+.App-albums h2 {
+  font-size: 1.3rem;
+  margin: 0 0 16px;
+}
+
+.App-albums-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.App-album {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.App-album img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.App-album span {
+  color: #b3b3b3;
+}
+
+/* Barra inferior del reproductor */
+
+.PlayerBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  background: #0c1015;
+  border-top: 1px solid #282c34;
+  z-index: 100;
+  text-align: left;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.PlayerBar img {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.PlayerBar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+  font-size: 0.85rem;
+  color: #b3b3b3;
+}
+
+.PlayerBar-info strong {
+  color: #fff;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.PlayerBar-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #1db954;
+  color: #0c1015;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.PlayerBar-toggle:hover {
+  background: #1aa74a;
+}
+
+/* Barra superior de usuario y navegación */
+.App-user-bar {
+  width: 100%;
+  max-width: 860px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+}
+
+.App-user-name {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.App-role-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #b3b3b3;
+}
+
+.App-role-badge--admin {
+  background: rgba(235, 179, 58, 0.2);
+  color: #f7ca5e;
+  border: 1px solid rgba(235, 179, 58, 0.4);
+}
+
+.App-user-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.App-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  background: #1db954;
+  color: #0c1015;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.App-nav-link:hover {
+  background: #1ed760;
+}
+
+.App-logout-button {
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 100, 100, 0.35);
+  background: rgba(255, 60, 60, 0.15);
+  color: #ff8b8b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.App-logout-button:hover {
+  background: rgba(255, 60, 60, 0.3);
+  color: #fff;
+}
+
+/* Panel de administración de la base de datos */
+.AdminPanel {
+  width: 100%;
+  max-width: 860px;
+  box-sizing: border-box;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: #181c24;
+  border: 1px solid rgba(235, 179, 58, 0.3);
+  text-align: left;
+}
+
+.AdminPanel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.AdminPanel-title {
+  margin: 0;
+  font-size: 1rem;
+  color: #f7ca5e;
+}
+
+.AdminPanel-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.AdminPanel-reset {
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(235, 179, 58, 0.5);
+  background: rgba(235, 179, 58, 0.18);
+  color: #f7ca5e;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.AdminPanel-reset:hover:not(:disabled) {
+  background: rgba(235, 179, 58, 0.35);
+  color: #fff;
+}
+
+.AdminPanel-reset:disabled,
+.AdminPanel-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.AdminPanel-refresh {
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.AdminPanel-refresh:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.AdminPanel-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #9aa0aa;
+}
+
+.AdminPanel-notice {
+  margin: 0.6rem 0 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(29, 185, 84, 0.15);
+  border: 1px solid rgba(29, 185, 84, 0.4);
+  color: #1ed760;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.AdminPanel-subtitle {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.85rem;
+  color: #d0d0d0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.AuditList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.AuditItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.8rem;
+  color: #c8cdd4;
+}
+
+.AuditItem--error {
+  color: #ff8b8b;
+}
+
+.AuditItem-action {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.AuditItem-who {
+  font-weight: 600;
+  color: #1ed760;
+}
+
+.AuditItem-resource {
+  color: #9aa0aa;
+}
+
+.AuditItem-date {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: #7b818b;
+  white-space: nowrap;
+}
+
+/* Playlists */.Playlist-card {
+  background: #181c24;
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
+}
+
+.Playlist-card--detail {
+  background: #151a22;
+  border-color: rgba(29, 185, 84, 0.3);
+}
+
+.Playlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.Playlist-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Playlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  transition: background 0.15s;
+}
+
+.Playlist-item:hover,
+.Playlist-item--active {
+  background: rgba(29, 185, 84, 0.08);
+  border-color: rgba(29, 185, 84, 0.3);
+}
+
+.Playlist-item-main {
+  background: transparent;
+  border: none;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  flex: 1;
+  padding: 0;
+}
+
+.Playlist-track-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Playlist-track-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  gap: 0.75rem;
+}
+
+/* Cabecera de páginas internas (Playlists, etc.) */
+.App-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+  background-color: #191414;
+  color: white;
+  gap: 12px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.App-page h1 {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+/* El main NO debe heredar el text-align: center del .App */
+.App-main {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+  text-align: left;          /* ← clave para que no se vea "corrido" */
+  box-sizing: border-box;
 }
